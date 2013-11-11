@@ -271,8 +271,7 @@ body {
 
 
 .feature .header-container {
-  padding-top: 40px;
-  padding-bottom: 300px;
+  padding: 40px 0 80px;
 }
 
 .project section {
@@ -381,11 +380,22 @@ nav .typcn-chevron-right {
   right: 50px;
 }
 
-.nav-home {
+.nav-home, .nav-back {
   position: fixed;
   top: 50px;
   left: 50px;
 }
+
+.nav-back a {
+  color: rgba(0,0,0,0.1) !important;
+  background: transparent !important;
+}
+
+.nav-back a:hover {
+  color: #fff !important;
+  color: rgba(0,0,0,0.5) !important;
+}
+
 
 nav .typcn-home {
   color: rgba(0,0,0,0.1);
@@ -595,7 +605,7 @@ nav .typcn-home {
 }
 
 .starsandstates .dataflag .project-illustration {
-  margin-top: 60px; 
+  margin-top: 40px; 
 }
 
 .starsandstates .instructive-fun .project-illustration {
@@ -849,14 +859,14 @@ perspective effects (not including the modals and the overlay).
   .main aside {
     float: right;
     width: 28%;
-  }
-}*/
+  }*/
+}
 
 @media only screen and (min-width: 1140px) {
 
 /* ===============
     Maximal Width
-    =============== */
+    =============== 
 
 /*  .wrapper {
     width: 1026px;  1140px - 10% for margins 
@@ -943,9 +953,9 @@ perspective effects (not including the modals and the overlay).
    ========================================================================== */
 
 @media print {
-  * {
+/*  * {
     background: transparent !important;
-    color: #000 !important; /* Black prints faster: h5bp.com/s */
+    color: #000 !important; /* Black prints faster: h5bp.com/s *//*
     box-shadow: none !important;
     text-shadow: none !important;
   }
@@ -961,13 +971,13 @@ perspective effects (not including the modals and the overlay).
 
   abbr[title]:after {
     content: " (" attr(title) ")";
-  }
+  }*/
 
   /*
    * Don't show links for images, or javascript/internal links
    */
 
-   .ir a:after,
+/*   .ir a:after,
    a[href^="javascript:"]:after,
    a[href^="#"]:after {
     content: "";
@@ -980,7 +990,7 @@ perspective effects (not including the modals and the overlay).
   }
 
   thead {
-    display: table-header-group; /* h5bp.com/t */
+    display: table-header-group;  h5bp.com/t 
   }
 
   tr,
@@ -1006,5 +1016,5 @@ perspective effects (not including the modals and the overlay).
   h2,
   h3 {
     page-break-after: avoid;
-  }
+  }*/
 }
