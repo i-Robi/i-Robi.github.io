@@ -333,6 +333,26 @@ body {
   padding: 90px 0;
 }
 
+.feature .header-container header {
+  padding-bottom: 0;
+}
+
+.header-container .read-more {
+  margin-top: 100px;
+  color: rgba(255, 255, 255, .5);
+}
+
+.header-container .read-more .typcn {
+  display: inline-block;
+  -webkit-transform: rotate(90deg);
+     -moz-transform: rotate(90deg);
+       -o-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+          transform: rotate(90deg);
+  width: 20px;
+  margin: auto;
+}
+
 .footer-container footer {
   padding-top: 50px;
 }
@@ -485,7 +505,7 @@ body {
 
 
 .feature .header-container {
-  padding: 40px 0 80px;
+  padding: 40px 0 0;
 }
 
 .project section {
@@ -653,6 +673,7 @@ nav .typcn-home {
   border-top: 8px solid rgba(0,0,0,0.0);
   border-bottom: 13px solid rgba(0,0,0,0.0);
 }
+
 
 
 
