@@ -738,7 +738,7 @@ nav .typcn-home {
   color: #fff;
 }
 
-.home a {
+.home .summary a {
   /*color: #fff;*/
   border-bottom: 2px dashed #fff;
 }
@@ -772,6 +772,25 @@ nav .typcn-home {
   margin-top: 20px;
 }
 
+.home .contact {
+  bottom: 50px;
+  font-size: 2em;
+  line-height: .7em;
+  position: fixed;
+  text-align: center;
+  width: 100%;
+}
+
+.home .contact a:link,
+.home .contact a:visited,
+.home .contact a:hover,
+.home .contact a:active {
+  color: #fff;
+}
+
+.home .contact .caption {
+  font-size: .6em;
+}
 
 
 
