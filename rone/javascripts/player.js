@@ -2339,11 +2339,11 @@ var client = {
   type: null,
   index: -1,
   coordinates: null,
-  init: init,
+  // init: init,
   start: start,
   socket: null,
-  send: send,
-  receive: receive,
+  // send: send,
+  // receive: receive,
   serial: serial,
   parallel: parallel
 };
@@ -2415,31 +2415,31 @@ var SerialModule = (function(super$0){if(!PRS$0)MIXIN$0(SerialModule, super$0);v
   };
 MIXIN$0(SerialModule.prototype,proto$0);proto$0=void 0;return SerialModule;})(ClientModule);
 
-function init(clientTyppe) {
-  client.type = clientTyppe;
-  client.socket = io('/' + clientTyppe);
-}
+// function init(clientTyppe) {
+//   client.type = clientTyppe;
+//   client.socket = io('/' + clientTyppe);
+// }
 
 function start(theModule) {
   // client/server handshake: send "ready" to server ...
-  client.send('client:ready');
+  // client.send('client:ready');
 
   // ... wait for server's "start" ("server ready") to start modules
-  client.receive('server:ready', function()  {
+  // client.receive('server:ready', function()  {
     theModule.start();
-  });
+  // });
 
-  client.receive('disconnect', function()  {
-  });
+  // client.receive('disconnect', function()  {
+  // });
 }
 
-function send(msg) {var $D$0;function ITER$0(v,f){if(v){if(Array.isArray(v))return f?v.slice():v;var i,r;if(S_MARK$0)S_MARK$0(v);if(typeof v==='object'&&typeof (f=v[S_ITER$0])==='function'){i=f.call(v);r=[];}else if((v+'')==='[object Generator]'){i=v;r=[];};if(S_MARK$0)S_MARK$0(void 0);if(r) {while((f=i['next']()),f['done']!==true)r.push(f['value']);return r;}}throw new Error(v+' is not iterable')};var args = SLICE$0.call(arguments, 1);
-  ($D$0 = client.socket).emit.apply($D$0, [msg].concat(ITER$0(args)));
-;$D$0 = void 0}
+// function send(msg) {var $D$0;function ITER$0(v,f){if(v){if(Array.isArray(v))return f?v.slice():v;var i,r;if(S_MARK$0)S_MARK$0(v);if(typeof v==='object'&&typeof (f=v[S_ITER$0])==='function'){i=f.call(v);r=[];}else if((v+'')==='[object Generator]'){i=v;r=[];};if(S_MARK$0)S_MARK$0(void 0);if(r) {while((f=i['next']()),f['done']!==true)r.push(f['value']);return r;}}throw new Error(v+' is not iterable')};var args = SLICE$0.call(arguments, 1);
+//   ($D$0 = client.socket).emit.apply($D$0, [msg].concat(ITER$0(args)));
+// ;$D$0 = void 0}
 
-function receive(msg, callback) {
-  client.socket.on(msg, callback);
-}
+// function receive(msg, callback) {
+//   client.socket.on(msg, callback);
+// }
 
 function serial() {var modules = SLICE$0.call(arguments, 0);
   return new SerialModule(modules);
@@ -16150,7 +16150,7 @@ var Performance = require('./performance');
 var Input = require('./input');
 
 // Initiliaze the client in its namespace
-client.init('player');
+// client.init('player');
 
 var files = ['sounds/jiggle.wav', 'sounds/shake.mp3', 'sounds/tilt.mp3'];
 
