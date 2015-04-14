@@ -2104,11 +2104,11 @@ var ClientPerformance = (function(super$0){var PRS$0 = (function(o,t){o["__proto
   proto$0.start = function() {
     super$0.prototype.start.call(this);
 
-    client.send('performance:start');
+    // client.send('performance:start');
   };
 
   proto$0.done = function() {
-    client.send('performance:done');
+    // client.send('performance:done');
 
     super$0.prototype.done.call(this);
   };
