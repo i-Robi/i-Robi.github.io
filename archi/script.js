@@ -16,7 +16,7 @@ var webaudio = new WebAudio();
 // from this url 'sounds/perfume.mp3'. The callback will be notified as soon as the sound
 // is loaded. Then we simply start to play it. Don't forget to get ```.loop(true)```
 // thus the sound will loop forever.
-var sound = webaudio.createSound().load('dies.mp3', function(sound) {
+var sound = webaudio.createSound().load('moz.mp3', function(sound) {
   sound.loop(true).play();
 });
 
@@ -48,25 +48,29 @@ tQuery.createDirectionalLight().addTo(world).position(-1, -1, 1).color(0x8888FF)
 // var nWidth = 30;
 // var nHeight = 1;
 
-var nWidth = 13;
+var nWidth = 12;
 var nHeight = 5;
 var nCubes = nWidth * nWidth * nHeight;
 
-cubeDimension = 80 / nWidth;
+cubeDimension = 50 / nWidth;
 
 var cubes = [];
 
 var group3d = tQuery.createObject3D().scale(1 / 20).addTo(world);
 
-for (var i = 0; i < nWidth; i++) {
+for (var k = 0; k < nWidth / 2; k++) {
   for (var j = 0; j < nWidth; j++) {
-    for (var k = 0; k < nHeight; k++) {
-      var cube = tQuery.createCube(cubeDimension, cubeDimension, cubeDimension, new THREE.MeshLambertMaterial({
-        ambient: 0x888888,
-        color: 0xFFFFFF
-      }));
-      cube.addTo(group3d).position((i - nWidth / 2) * cubeDimension, (j - nWidth / 2) * cubeDimension, k * cubeDimension);
-      cubes.push(cube);
+    for (var i = 0; i < nWidth; i++) {
+      var eq = Math.pow(i - nWidth / 2, 2) + Math.pow(j - nWidth / 2, 2) + 2 * Math.pow(k - nWidth / 2, 2);
+      var bound = Math.pow(nWidth / 2, 2);
+      if (eq > bound) {
+        var cube = tQuery.createCube(cubeDimension, cubeDimension, cubeDimension, new THREE.MeshLambertMaterial({
+          ambient: 0x888888,
+          color: 0xFFFFFF
+        }));
+        cube.addTo(group3d).position((i - nWidth / 2) * cubeDimension, (j - nWidth / 2) * cubeDimension, (k - nWidth / 2) * cubeDimension);
+        cubes.push(cube);
+      }
     }
   }
 }
@@ -104,35 +108,3 @@ world.loop().hook(function() {
     cube.get(0).material.color.setHSL(0.3 + height * 0.7, 1, 0.5)
   });
 });
-
-
-
-// var nBar  = 41;
-// console.assert(nBar%2, "nBar MUST be a odd number.")
-// // Now we need to compute the width of each 3D bar. The whole vuemeter is
-// // 80 wide. So each bar is ```80/nBar``` wide.
-// var barW  = 80/nBar;
-// // We create an array ```bars3d```. We will use it to store the object3D
-// // for all bars of the  histogram.
-// var bars3d  = [];
-
-// // # Create the 3D
-
-// // create the container group3D which gonna regroup all the bar3D
-// var group3d = tQuery.createObject3D().scale(1/20).addTo(world);
-// // We gonna build each bar and add it to ```group3d```.
-// // We loop to create ```nBar``` with ```tQuery.createCube()```. In fact a bar
-// // is a rectangular box, so like a cube with different dimensions.
-// // a bar got a width of ```barW```, an height of 10 and a depth of 5.
-// // The material is a simple [lambert](http://en.wikipedia.org/wiki/Lambertian_reflection).
-// // Once the bar is create, we add it to ```group3d``` and set it to the correct
-// // position in space.
-// // We push every bar3d into ```bars3d``` for future reference.
-// for(var i = 0; i < nBar; i++){
-//   var bar3d = tQuery.createCube(barW, 10, 5, new THREE.MeshLambertMaterial({
-//     ambient : 0x888888,
-//     color : 0xFFFFFF
-//   }));
-//   bar3d.addTo(group3d).position((i-nBar/2)*barW, 0, 0);
-//   bars3d.push(bar3d);
-// }
