@@ -11548,16 +11548,15 @@ var client = {
   coordinates: null,
   init: init,
   start: start,
+  serial: serial,
+  parallel: parallel,
+  io: null,
   socket: null,
   send: send,
-  receive: receive,
-  serial: serial,
-  parallel: parallel
+  receive: receive
 };
 
-var EventEmitter = require('events').EventEmitter;
 var ClientModule = require('./ClientModule');
-var io = require('socket.io-client');
 
 var ParallelModule = (function(super$0){if(!PRS$0)MIXIN$0(ParallelModule, super$0);var proto$0={};
   function ParallelModule(modules) {
@@ -11622,30 +11621,32 @@ var SerialModule = (function(super$0){if(!PRS$0)MIXIN$0(SerialModule, super$0);v
   };
 MIXIN$0(SerialModule.prototype,proto$0);proto$0=void 0;return SerialModule;})(ClientModule);
 
-function init(clientTyppe) {
-  client.type = clientTyppe;
-  client.socket = io('/' + clientTyppe);
+function init() {var clientType = arguments[0];if(clientType === void 0)clientType = 'player';var options = arguments[1];if(options === void 0)options = {};
+  client.type = clientType;
+  client.io = null;
+
+  if (options.io !== false) {
+    var io = require('socket.io-client');
+    client.io = io;
+    client.socket = client.io('/' + clientType);
+  }
 }
 
 function start(theModule) {
-  // client/server handshake: send "ready" to server ...
-  client.send('client:ready');
 
-  // ... wait for server's "start" ("server ready") to start modules
-  client.receive('server:ready', function()  {
-    theModule.start();
-  });
+  if (client.io) {
+    // client/server handshake: send "ready" to server ...
+    client.send('client:ready');
 
-  client.receive('disconnect', function()  {
-  });
-}
+    // ... wait for server's "start" ("server ready") to start modules
+    client.receive('server:ready', function()  {
+      theModule.start();
+    });
 
-function send(msg) {var $D$0;function ITER$0(v,f){if(v){if(Array.isArray(v))return f?v.slice():v;var i,r;if(S_MARK$0)S_MARK$0(v);if(typeof v==='object'&&typeof (f=v[S_ITER$0])==='function'){i=f.call(v);r=[];}else if((v+'')==='[object Generator]'){i=v;r=[];};if(S_MARK$0)S_MARK$0(void 0);if(r) {while((f=i['next']()),f['done']!==true)r.push(f['value']);return r;}}throw new Error(v+' is not iterable')};var args = SLICE$0.call(arguments, 1);
-  ($D$0 = client.socket).emit.apply($D$0, [msg].concat(ITER$0(args)));
-;$D$0 = void 0}
-
-function receive(msg, callback) {
-  client.socket.on(msg, callback);
+    client.receive('disconnect', function()  {});
+  } else {
+    theModule.start();    
+  }
 }
 
 function serial() {var modules = SLICE$0.call(arguments, 0);
@@ -11656,8 +11657,18 @@ function parallel() {var modules = SLICE$0.call(arguments, 0);
   return new ParallelModule(modules);
 }
 
+function send(msg) {var $D$0;function ITER$0(v,f){if(v){if(Array.isArray(v))return f?v.slice():v;var i,r;if(S_MARK$0)S_MARK$0(v);if(typeof v==='object'&&typeof (f=v[S_ITER$0])==='function'){i=f.call(v);r=[];}else if((v+'')==='[object Generator]'){i=v;r=[];};if(S_MARK$0)S_MARK$0(void 0);if(r) {while((f=i['next']()),f['done']!==true)r.push(f['value']);return r;}}throw new Error(v+' is not iterable')};var args = SLICE$0.call(arguments, 1);
+  if(client.socket)
+    ($D$0 = client.socket).emit.apply($D$0, [msg].concat(ITER$0(args)));
+;$D$0 = void 0}
+
+function receive(msg, callback) {
+  if(client.socket)
+    client.socket.on(msg, callback);
+}
+
 module.exports = client;
-},{"./ClientModule":8,"events":1,"socket.io-client":18}],15:[function(require,module,exports){
+},{"./ClientModule":8,"socket.io-client":18}],15:[function(require,module,exports){
 /**
  * @fileoverview Soundworks client side exported modules
  * @author Sebastien.Robaszkiewicz@ircam.fr, Norbert.Schnell@ircam.fr
