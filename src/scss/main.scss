@@ -1,0 +1,146 @@
+/**
+ * @fileoverview Main stylesheet
+ * @author <a href='mailto:hello@robi.me'>Sébastien Robaszkiewicz</a>
+ */
+
+@import 'reset';
+@import 'animation-mixins';
+@import 'flexbox-mixins';
+
+html, body {
+  height: 100%;
+  font-size: 16px;
+}
+
+body {
+  background: url(../img/bg.jpg) #d2bd90 no-repeat center/cover;
+  color: white;
+  font-family: 'Lato', 'sans-serif';
+  max-height: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  text-align: center;
+}
+
+h2 {
+  font-size: 0.75rem;
+}
+
+h3 {
+  font-size: 0.6rem;
+}
+
+#scene {
+  left: 0;
+  position: absolute;
+  top: 0;
+  z-index: -1;
+}
+
+.container {
+  @include align-items(center);
+  @include flexbox;
+  @include justify-content(center);
+  height: 100%;
+  padding: 0 30px;
+}
+
+.title {
+  letter-spacing: 0.4rem;
+  line-height: 1.2;
+  margin: 1rem 0 0.5rem;
+  text-transform: uppercase;
+
+  &.large-screen {
+    display: none;
+  }
+}
+
+.subtitle {
+  letter-spacing: 0.3rem;
+  margin: 1rem 0;
+  text-transform: uppercase;
+}
+
+.tagline {
+  font-family: 'Merriweather', 'serif';
+  font-style: italic;
+  font-weight: 300;
+  letter-spacing: 0.05rem;
+  margin: 0.5rem 0;
+}
+
+.button {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid white;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 0.6rem;
+  letter-spacing: 0.1rem;
+  margin: 2rem auto 0;
+  padding: 0.3rem 0.4rem 0.3rem 0.5rem;
+  text-transform: uppercase;
+
+  &:active {
+    background-color: rgba(255, 255, 255, 0.5)
+  }
+}
+
+.touchevents .button {
+  @include transition('background-color 0.1s');
+}
+
+.no-touchevents .button {
+  @include transition('background-color 0.5s');
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (min-width : 320px) {
+
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width : 480px) {
+    .title.large-screen {
+      display: block;
+    }
+
+    .title.small-screen {
+      display: none;
+    }
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+  html, body {
+    font-size: 20px;
+  }
+
+  .button {
+    border: 2px solid white;
+  }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+  html, body {
+    font-size: 24px;
+  }
+
+  .title {
+    letter-spacing: 0.5rem;
+  }
+
+  .subtitle {
+    font-weight: 300;
+  }
+}

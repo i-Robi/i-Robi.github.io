@@ -1,4 +1,5 @@
 'use strict';
+// blah bl
 
 class Edge {
   constructor(node1, node2, distance, minDistance) {

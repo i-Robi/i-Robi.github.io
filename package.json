@@ -16,6 +16,7 @@
     "prebundle": "npm run hint && npm run transpile",
     "bundle": "node ./bin/scripts.js --bundle",
     "postbundle": "npm run uglify",
+    "sass": "node ./bin/scripts.js --sass",
     "uglify": "node ./bin/scripts.js --uglify",
     "watch": "node ./bin/scripts.js --watch",
     "hint": "jshint ./src; true"
@@ -35,6 +36,7 @@
     "cli-color": "^1.0.0",
     "fs-extra": "^0.22.1",
     "jshint": "^2.8.0",
+    "node-sass": "^3.2.0",
     "node-watch": "^0.3.4",
     "uglify-js": "^2.4.24"
   }

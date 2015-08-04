@@ -2,8 +2,8 @@ var babel = require('babel');
 var browserify = require('browserify');
 var childProcess = require('child_process');
 var clc = require('cli-color');
-var fs = require('fs');
 var fse = require('fs-extra');
+var nodeSass = require('node-sass');
 var nodeWatch = require('node-watch');
 var pkg = require('../package.json');
 var uglifyJS = require('uglify-js');
@@ -11,9 +11,11 @@ var util = require('util');
 
 // CONFIG
 // -----------------------------------------------
-var srcDir = 'src';
+var jsSrcDir = 'src/js';
 var buildDir = 'build';
 var jsDir = 'js';
+var cssDir = 'css';
+var scssDir = 'src/scss';
 
 // options for babel
 var babelOptions = {
@@ -39,17 +41,20 @@ var NC    = '\033[0m'; // No Color
 var command = process.argv[2];
 // execute the correct function given the script
 switch (command) {
-  case '--watch':
-    watch();
-    break;
   case '--bundle':
     bundle();
+    break;
+  case '--sass':
+    sass();
+    break;
+  case '--transpile':
+    transpileAll();
     break;
   case '--uglify':
     uglify();
     break;
-  case '--transpile':
-    transpileAll();
+  case '--watch':
+    watch();
     break;
 }
 
@@ -59,7 +64,7 @@ switch (command) {
 // create filename from src to build
 function createTargetName(filename) {
   // replace source dir with target dir and '.es6.js' to '.js'
-  return filename.replace(new RegExp('^' + srcDir), buildDir).replace('.es6.js', '.js');
+  return filename.replace(new RegExp('^' + jsSrcDir), buildDir).replace('.es6.js', '.js');
 }
 
 // create filename from `pkg.main` to `umd` version
@@ -77,9 +82,14 @@ function getMinName() {
 
 // watch source dir
 function watch() {
-  nodeWatch(srcDir, function(filename) {
+  nodeWatch(jsSrcDir, function(filename) {
+    console.log(util.format(green + '=> "%s" changed' + NC, filename));
     transpile(filename, bundle);
   });
+  nodeWatch(scssDir, function(filename) {
+    console.log(util.format(green + '=> "%s" changed' + NC, filename));
+    sass(filename);
+  })
 }
 
 // create the `.umd.js` version
@@ -113,9 +123,9 @@ function uglify() {
   });
 }
 
-// transpile all files in `srcDir`
+// transpile all files in `jsSrcDir`
 function transpileAll() {
-  var cmd = 'find ' + srcDir + ' -type f';
+  var cmd = 'find ' + jsSrcDir + ' -type f';
 
   childProcess.exec(cmd , function(err, stdout, stderr) {
     if (err) { console.error(err); }
@@ -144,5 +154,27 @@ function transpile(src, cb) {
 
     console.log(util.format(green + '=> "%s" successfully transpiled to "%s"' + NC, src, target));
     cb();
+  });
+}
+
+// convert to sass
+function sass(filename) {
+  var src = scssDir + '/main.scss';
+  var target = cssDir + '/main.css';
+
+  nodeSass.render({
+    file: src,
+    outFile: target
+  }, function(error, result) { // node-style callback from v3.0.0 onwards
+    if (error) {
+      return console.error('ERROR (status ' + error.status + ', line ' + error.line + ', column ' + error.column + '):\n' + error.message + '\nin ' + error.file );
+    }
+
+    fse.outputFile(cssDir + '/main.css', result.css, function(err) {
+      if (err) { return console.error(err.message); }
+
+      console.log(util.format(green + '=> "%s" successfully transpiled to "%s"' + NC, src, target));
+    });
+
   });
 }

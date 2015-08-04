@@ -8,8 +8,9 @@
 
   <title>Sébastien Robaszkiewicz</title>
 
-  <link href='http://fonts.googleapis.com/css?family=Lato:400' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Merriweather:400italic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Merriweather:300italic' rel='stylesheet' type='text/css'>
+  <link href='css/main.css' rel='stylesheet' type='text/css'>
 
   <link rel="apple-touch-icon" sizes="57x57" href="img/favicon/apple-touch-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="img/favicon/apple-touch-icon-60x60.png">
@@ -28,139 +29,22 @@
   <meta name="msapplication-TileColor" content="#da532c">
   <meta name="msapplication-TileImage" content="/mstile-144x144.png">
   <meta name="theme-color" content="#ffffff">
-  
-  <style type="text/css">
-    html, body {
-      height: 100%;
-      font-size: 16px;
-    }
 
-    body {
-      padding: 0;
-      margin: 0;
-      overflow: hidden;
-      background: url(img/bg.jpg) #202020 no-repeat;
-      background-size: cover;
-      background-position: center;
-      max-height: 100%;
-      max-width: 100%;
-      font-family: 'Lato', 'sans-serif';
-      color: white;
-    }
 
-    canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: -1;
-    }
-
-    .container {
-      height: 100%;
-      padding: 0 40px;
-      display: -webkit-flex;
-      display:         flex;
-      -webkit-align-items: center;
-              align-items: center;
-      -webkit-justify-content: center;
-              justify-content: center;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 1rem;
-      font-weight: 400;
-      letter-spacing: 0.5rem;
-      text-align: center;
-      text-transform: uppercase;
-    }
-
-    h2 {
-      font-size: 0.75rem;
-      font-weight: 400;
-      letter-spacing: 0.3rem;
-      margin: 1rem 0;
-      text-align: center;
-      text-transform: uppercase;
-    }
-
-    h3 {
-      font-family: 'Merriweather', 'serif';
-      font-size: 0.6rem;
-      font-style: italic;
-      letter-spacing: 0.1rem;
-    }
-
-    .subtitle {
-      display: none;
-    }
-
-    .bottom {
-      padding: 1rem 0;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      text-align: center;
-    }
-
-    .button {
-      background-color: rgba(255, 255, 255, 0.25);
-      margin: 2rem auto 0;
-      display: inline-block;
-      font-size: 0.6rem;
-      border: 1px solid white;
-      padding: 0.3rem 0.4rem 0.3rem 0.5rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1rem;
-      cursor: pointer;
-    }
-
-    .no-touchevents .button {
-      -webkit-transition: background-color 0.5s;
-              transition: background-color 0.5s;
-    }
-
-    .no-touchevents .button:hover {
-      background-color: rgba(255, 255, 255, 0.5);
-    }
-
-    .button:active {
-      background-color: rgba(255, 255, 255, 0.5)
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-      -webkit-tap-highlight-color: rgba(0,0,0,0);
-    }
-
-    @media (min-width: 640px) {
-      html, body {
-        font-size: 20px;
-      }
-
-      .subtitle {
-        display: block;
-      }
-
-      .button {
-        border: 2px solid white;
-      }
-    }
-  </style>
 </head>
 <body>
   <canvas id="scene"></canvas>
   <div class="container">
     <div>
-      <h1>sébastien robaszkiewicz</h1>
-      <h3 class="subtitle">(a.k.a. Robi)</h3>
-      <h2>digital experiences</h2>
-      <div class="button soft-blink"><a href='mailto:hello@robi.me?subject=Hello!'>contact</a></div>
+      <h1 class="title large-screen">Sébastien Robaszkiewicz</h1>
+      <h1 class="title small-screen">S. Robaszkiewicz</h1>
+      <h3 class="tagline">(call me Robi)</h3>
+      <h2 class="subtitle">Digital experiences</h2>
+      <div class="button">
+        <a href='mailto:hello@robi.me?subject=Hello!'>contact</a>
+      </div>
     </div>
   </div>
-<!--   <div class="bottom">
-  </div> -->
 </body>
 <script src="js/modernizr.js"></script>
 <script src="js/index.umd.js"></script>
