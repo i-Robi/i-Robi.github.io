@@ -1,0 +1,41 @@
+{
+  "name": "robi.me",
+  "version": "2.0.0",
+  "description": "Sébastien Robaszkiewicz's personal website.",
+  "main": "build/index.js",
+  "homepage": "http://robi.me",
+  "author": {
+    "name": "Sébastien Robaszkiewicz",
+    "email": "hello@robi.me",
+    "url": "http://robi.me"
+  },
+  "repository": "i-Robi/i-Robi.github.io",
+  "standalone": "script",
+  "scripts": {
+    "transpile": "node ./bin/scripts.js --transpile",
+    "prebundle": "npm run hint && npm run transpile",
+    "bundle": "node ./bin/scripts.js --bundle",
+    "postbundle": "npm run uglify",
+    "uglify": "node ./bin/scripts.js --uglify",
+    "watch": "node ./bin/scripts.js --watch",
+    "hint": "jshint ./src; true"
+  },
+  "jshintConfig": {
+    "esnext": true,
+    "browser": true,
+    "node": true,
+    "devel": true
+  },
+  "dependencies": {
+    "babel-runtime": "^5.8.19",
+    "motion-input": "collective-soundworks/motion-input#1.0.2"
+  },
+  "devDependencies": {
+    "browserify": "^11.0.1",
+    "cli-color": "^1.0.0",
+    "fs-extra": "^0.22.1",
+    "jshint": "^2.8.0",
+    "node-watch": "^0.3.4",
+    "uglify-js": "^2.4.24"
+  }
+}

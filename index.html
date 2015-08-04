@@ -1,120 +1,167 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-<head>
-  <meta charset="utf-8"/>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<html>
+<head lang="en-US">
+  <meta charset="utf-8">
+  <meta name="author" content="Sébastien Robaszkiewicz">
+  <meta name="description" content="Sébastien Robaszkiewicz (a.k.a. Robi)'s homepage."> <!-- TODO -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
   <title>Sébastien Robaszkiewicz</title>
-  <meta name="description" content="Sébastien Robaszkiewicz (a.k.a. Robi) is a creative technologist, art lover and entrepreneur. Browse this website to learn more about his projects."/>
-  <meta name="author" content="Sébastien Robaszkiewicz"/>
-  <meta name="viewport" content="width=device-width"/>
 
-  <link rel="stylesheet" href="css/normalize.css"/>
-  <link rel="stylesheet" href="css/main.css"/>
-  <link rel='stylesheet' href='css/typicons.css'/>
+  <link href='http://fonts.googleapis.com/css?family=Lato:400' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Merriweather:400italic' rel='stylesheet' type='text/css'>
 
-  <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-  <meta name="google-site-verification" content="yh2kk1KD3e5hkaxe13GISV3DuqKgFwMyNLEvMGUcpLg" />
+  <link rel="apple-touch-icon" sizes="57x57" href="img/favicon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="img/favicon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="img/favicon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="img/favicon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="img/favicon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="img/favicon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="img/favicon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="img/favicon/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="img/favicon/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="img/favicon/android-chrome-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="img/favicon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="img/favicon/favicon-16x16.png" sizes="16x16">
+  <link rel="manifest" href="img/favicon/manifest.json">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  
+  <style type="text/css">
+    html, body {
+      height: 100%;
+      font-size: 16px;
+    }
+
+    body {
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+      background: url(img/bg.jpg) #202020 no-repeat;
+      background-size: cover;
+      background-position: center;
+      max-height: 100%;
+      max-width: 100%;
+      font-family: 'Lato', 'sans-serif';
+      color: white;
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    .container {
+      height: 100%;
+      padding: 0 40px;
+      display: -webkit-flex;
+      display:         flex;
+      -webkit-align-items: center;
+              align-items: center;
+      -webkit-justify-content: center;
+              justify-content: center;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: 0.5rem;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.3rem;
+      margin: 1rem 0;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    h3 {
+      font-family: 'Merriweather', 'serif';
+      font-size: 0.6rem;
+      font-style: italic;
+      letter-spacing: 0.1rem;
+    }
+
+    .subtitle {
+      display: none;
+    }
+
+    .bottom {
+      padding: 1rem 0;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+    }
+
+    .button {
+      background-color: rgba(255, 255, 255, 0.25);
+      margin: 2rem auto 0;
+      display: inline-block;
+      font-size: 0.6rem;
+      border: 1px solid white;
+      padding: 0.3rem 0.4rem 0.3rem 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1rem;
+      cursor: pointer;
+    }
+
+    .no-touchevents .button {
+      -webkit-transition: background-color 0.5s;
+              transition: background-color 0.5s;
+    }
+
+    .no-touchevents .button:hover {
+      background-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .button:active {
+      background-color: rgba(255, 255, 255, 0.5)
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+    }
+
+    @media (min-width: 640px) {
+      html, body {
+        font-size: 20px;
+      }
+
+      .subtitle {
+        display: block;
+      }
+
+      .button {
+        border: 2px solid white;
+      }
+    }
+  </style>
 </head>
-<body class="home color carrot">
-  <div class="ribbon-wrapper"><div class="ribbon">Currently <br/> under construction</div></div>
-<!--[if lt IE 7]>
-  <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-<![endif]-->
-<!-- OLD HEADER TO REMOVE
-  <div class="header-container">
-    <header class="wrapper clearfix">
-        <h1 class="title">h1.title</h1>
-        <nav>
-            <ul>
-                <li><a href="#">nav ul li a</a></li>
-                <li><a href="#">nav ul li a</a></li>
-                <li><a href="#">nav ul li a</a></li>
-            </ul>
-        </nav>
-    </header>
-  </div>
- -->
-  <div class="main-container">
-    <div class="main wrapper clearfix">
-
-      <section>
-        <header class="hidden">
-          <h1>Sébastien Robaszkiewicz</h1>
-          <h2>Robi</h2>
-          <!-- add 2-word description like "interactive developer" -->
-        </header>
-        <article>
-          <figure class="float-left clearfix">
-            <img src="img/robi.png" class="profile-picture"></img>
-          </figure>
-          <section class="summary clearfix">
-            <h2>Hi, I'm Robi</h2>
-            <h3>I like <span id="home-likes">design</span></h3>
-            <h3>I graduated from <span>Stanford</span></h3>
-            <!-- <h3>I'm a <a href="creative-technologist.html"><span>creative technologist</span></a>, an <a href="entrepreneur.html"><span>entrepreneur</span></a>, and an <a href="artist.html"><span>artist</span></a></h3> -->
-            <h3>Let me tell you more about <a href="creative-technologist.html" title="A glance at my different projects"><span>who I am</span></a></h3>
-          </section>
-        </article>
-      </section>
-
-    </div> <!-- #main -->
-  </div> <!-- #main-container -->
-
-  <section class="contact">
+<body>
+  <canvas id="scene"></canvas>
+  <div class="container">
     <div>
-      <a href="ressources/sebastien_robaszkiewicz-resume.pdf" target="_blank" title="See my resume"><span class="typcn typcn-document"></span>
-      <a href="http://www.linkedin.com/in/sebastienrobaszkiewicz" target="_blank" title="LinkedIn profile"><span class="typcn typcn-social-linkedin"></span>
-      <a href="mailto:sebastien@robaszkiewicz.com" title="Contact me"><span class="typcn typcn-mail"></span>
+      <h1>sébastien robaszkiewicz</h1>
+      <h3 class="subtitle">(a.k.a. Robi)</h3>
+      <h2>digital experiences</h2>
+      <div class="button soft-blink"><a href='mailto:hello@robi.me?subject=Hello!'>contact</a></div>
     </div>
-  </section>
-<!-- 
-  <div class="footer-container">
-    <footer class="wrapper">
-        <h3>footer</h3>
-    </footer>
   </div>
- -->
-  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-  <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
-
-  <script src="js/main.js"></script>
-
-  <script>
-    var homeLikes = ["empowering people", "design", "music", "art", "technology", "disruption", "dreaming", "learning"];
-    // "empowering people", "design", "music", "art", "technology", "running", "disruption", "dreaming", "learning", "teaching"
-
-    function randomizeArray(arr) {
-      for (var j, x, i = arr.length; i; j = parseInt(Math.random() * i),
-        x = arr[--i],
-        arr[i] = arr[j],
-        arr[j] = x)
-
-      return arr;
-    }
-
-    function rotateLike() {
-      var ct = $("#home-likes").data("homeLikes") || 0;
-      $("#home-likes").data("homeLikes", ct == homeLikes.length -1 ? 0 : ct + 1).text(homeLikes[ct]).fadeIn().delay(2000).fadeOut(200, rotateLike);
-    }
-    
-    $(document).ready(function() {
-      homeLikes.sort(function() { return 0.5 - Math.random() });
-      $(rotateLike)
-    })
-  </script>
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-45630434-1', 'robi.me');
-  ga('send', 'pageview');
-
-</script>
+<!--   <div class="bottom">
+  </div> -->
 </body>
+<script src="js/modernizr.js"></script>
+<script src="js/index.umd.js"></script>
 </html>

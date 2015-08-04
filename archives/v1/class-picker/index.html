@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script type="text/javascript" src="js/jquery.tools.min.js"></script>
+		<script type="text/javascript" src="js/underscore-min.js"></script>
+		<script type="text/javascript" src='js/backbone.js'></script>
+		<script type="text/javascript" src="js/d3.v2.min.js"></script>
+		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrapx-clickover.js"></script>
+		<script type="text/javascript" src="js/script.js"></script>
+		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="style/style.css">
+	</head>
+	<body>
+		<header> Header </header>
+        <section class='container' id='select-program-container'>
+        	<div class='alert alert-info'><strong>Heads-up!</strong> First, select your concentration. Once you are done, click on the button "Now select your courses" or on the tab "Select your courses" above to jump to the next step!</div>
+            <div id='programs'></div>
+        </section>
+        <section class='container' id='select-courses-container'>
+            <div class='row'>
+                <div id='left_bar' class='span3 bs-docs-sidebar'>
+                    <ul id='req-list' class='nav nav-list bs-docs-sidenav'></ul>
+                </div>
+                <div id='mid_section' class='span6'>
+<!--                     <div id="search" class="navbar navbar-fixed-top">
+                      <div class="navbar-inner">
+                      </div>
+                    </div> -->
+                    <div id='alert-area'></div>
+                    <!-- <table id='course-table'> </table> -->
+                    <div id='instructions'></div>
+                    <div id='course-table'></div>
+                </div>
+                <div id='right_bar' class='span3'>
+                    <div class='well'>
+                        <ul id='terms' class='nav nav-list'>
+                            <li class='nav-header'>Terms</li>
+                            <!-- <div id='term-list'></div> -->
+                        </ul>
+                        <div id='constraint'></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class='container' id='view-schedules-container'>
+            <div id='schedules'></div>
+        </section>
+<!--         <footer class="footer">
+        	<p>James Whitbeck, Sébastien Robaszkiewicz</p>
+        	<p>CS448b &mdash; final project</p>
+        </footer> -->
+        <div id="instructionsOverlay"></div>
+        <style type='text/css'>@import url('http://getbarometer.s3.amazonaws.com/assets/barometer/css/barometer.css');</style>
+        <script src='http://getbarometer.s3.amazonaws.com/assets/barometer/javascripts/barometer.js' type='text/javascript'></script>
+        <script type="text/javascript" charset="utf-8">
+            BAROMETER.load('5PkKgBOAgxpzqWTkGaCHd');
+        </script>
+	</body>
+	<script>
+	console.log($(window).height());
+	    $('#left_bar').height($(window).height()-60);
+		// $('#mid_section').height($(window).height()-100);
+		$('#right_bar').height($(window).height()-60);
+	window.onresize = function() {
+    	$('#left_bar').height($(window).height()-60);
+		// $('#mid_section').height($(window).height()-100);
+		$('#right_bar').height($(window).height()-60);
+	};
+
+    // $(document).click(function(e) {
+    //     $('.popover').hide();
+    // });
+    // $('.popover').click(function(e) {
+    //     e.stopPropagation();
+    // });
+
+    // $('.bs-docs-sidenav').affix({
+    //   offset: {
+    //     top: 0,
+    //     bottom: 128
+    //   }
+    // });
+
+    // $('#right_bar .well').affix({
+    //   offset: {
+    //     top: 0,
+    //     bottom: 144
+    //   }
+    // });
+	</script>
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-38980865-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</html>

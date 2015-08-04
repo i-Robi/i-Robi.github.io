@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>Sébastien Robaszkiewicz &mdash; Stars &amp; States</title>
+  <meta name="description" content="Stars &amp; States is a data visualization studies the historical progression of the Star-Spangled Banner designs, and shows the evolution of the flag with the years. A cursor allows users to navigate between periods to see how state additions impacted the flag design."/>
+  <meta name="viewport" content="width=device-width"/>
+
+  <link rel="stylesheet" href="css/normalize.css"/>
+  <link rel="stylesheet" href="css/main.css"/>
+  <link rel='stylesheet' href='css/typicons.css'/>
+
+  <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+</head>
+<body class="project starsandstates">
+  <div class="ribbon-wrapper"><div class="ribbon">Currently <br/> under construction</div></div>
+<!--[if lt IE 7]>
+  <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+<![endif]-->
+
+  <div class="header-container color teal">
+    <header class="wrapper clearfix">
+      <h1 class="hidden">Sébastien Robaszkiewicz</h1>
+      <h2>Stars &amp; States</h2>
+      <p class="subtitle">Evolution of the American flag and the states in the Union from 1776 to today</p>
+      <nav class="nav-back">
+        <a href="creative-technologist.html" title"Previous" class="typcn typcn-chevron-left"></a>
+      </nav>
+    </header>
+  </div>
+
+  <div class="main-container">
+    <div class="main clearfix">
+
+      <section class="subheader align-center">
+          <a class="button button-large" href="stars-and-states/starsandstates.html" target="_blank">Try the app!</a>
+      </section>
+      <article>
+        <section class="description alternate dataflag">
+          <div class="wrapper clearfix">
+            <figure class="project-illustration">
+              <img src="img/dataflag.png"></img>
+            </figure>
+            <div class="project-content">
+              <h3>The data is in the flag</h3>
+              <p>The short history of the United States has been one of relentless territorial expansion, pushing the frontier ever back. The Star-Spangled Banner has illustrated this expansion throughout time by adding a new star for each state that joined the Union. The flag itself is therefore a very interesting time series dataset that reflects the history of the United States of America.</p>
+            </div>
+          </div>
+        </section>
+        <section class="description">
+          <div class="wrapper clearfix">
+            <figure class="project-illustration">
+              <img src="img/slider.png"></img>
+            </figure>
+            <div class="project-content">
+              <h3>The slider: the interaction medium</h3>
+              <p>Our first round of user testing showed that we had to be particularly careful about the slider design, since it is the only interaction medium. We changed the initial basic slider to a custom one that would show periods in alternating colors. This led to a better interaction model, that we perfected with additional keyboard navigation.</p>
+            </div>
+        </section>
+        <section class="description alternate instructive-fun">
+          <div class="wrapper clearfix">
+            <figure class="project-illustration">
+              <img src="img/instructivefun.png"></img>
+            </figure>
+            <div class="project-content">
+              <h3>Instructive fun!</h3>
+              <p>Testing the app with a wide range of users made us realize its educational potential for children. So, we added a box under the slider that would display additional information. How might we make that even more engaging? By adding a dose of fun! We added official alternate flags for some periods with seamless transitions. In particular, check the periods 1837&ndash;1845 and 1877&ndash;1890, they're cool!</p>
+            </div>
+        </section>
+        <section class="description">
+          <div class="wrapper clearfix">
+            <figure class="project-illustration">
+              <img src="img/backbone.png"></img>
+            </figure>
+            <div class="project-content">
+              <h3>Backbone of the final app</h3>
+              <ul>
+                <li><strong>Slider:</strong> drag the cursor or use the keyboard arrows to navigate between periods</li>
+                <li><strong>Flag:</strong> the stars are added to the Union flag as new states are added to the Union</li>
+                <li><strong>Map:</strong> every time a state joins the Union, it gets highlighted and pops out for a brief moment</li>
+              </ul>
+            </div>
+        </section>
+        <section class="button-container align-center">
+          <a class="button button-large" href="stars-and-states/starsandstates.html" target="_blank">Try the app!</a>
+        </section>
+      </article>
+
+    </div> <!-- #main -->
+  </div> <!-- #main-container -->
+
+  <div class="footer-container color peter-river">
+    <footer class="wrapper">
+      <a href="icebreaker.html">
+        <p class="read-next"><em>Read next story</em></p>
+        <h2>Icebreaker</h2>
+        <p class="subtitle">Meet like-minded people near you</p>
+      </a>
+    </footer>
+  </div>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
+
+  <script src="js/main.js"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-45630434-1', 'robi.me');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

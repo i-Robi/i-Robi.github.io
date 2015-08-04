@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>Sébastien Robaszkiewicz</title>
+  <meta name="description" content="Sébastien Robaszkiewicz (a.k.a. Robi) is a creative technologist, art lover and entrepreneur. Browse this website to learn more about his projects."/>
+  <meta name="author" content="Sébastien Robaszkiewicz"/>
+  <meta name="viewport" content="width=device-width"/>
+
+  <link rel="stylesheet" href="css/normalize.css"/>
+  <link rel="stylesheet" href="css/main.css"/>
+  <link rel='stylesheet' href='css/typicons.css'/>
+
+  <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+  <meta name="google-site-verification" content="yh2kk1KD3e5hkaxe13GISV3DuqKgFwMyNLEvMGUcpLg" />
+</head>
+<body class="home color carrot">
+  <div class="ribbon-wrapper"><div class="ribbon">Currently <br/> under construction</div></div>
+<!--[if lt IE 7]>
+  <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+<![endif]-->
+<!-- OLD HEADER TO REMOVE
+  <div class="header-container">
+    <header class="wrapper clearfix">
+        <h1 class="title">h1.title</h1>
+        <nav>
+            <ul>
+                <li><a href="#">nav ul li a</a></li>
+                <li><a href="#">nav ul li a</a></li>
+                <li><a href="#">nav ul li a</a></li>
+            </ul>
+        </nav>
+    </header>
+  </div>
+ -->
+  <div class="main-container">
+    <div class="main wrapper clearfix">
+
+      <section>
+        <header class="hidden">
+          <h1>Sébastien Robaszkiewicz</h1>
+          <h2>Robi</h2>
+          <!-- add 2-word description like "interactive developer" -->
+        </header>
+        <article>
+          <figure class="float-left clearfix">
+            <img src="img/robi.png" class="profile-picture"></img>
+          </figure>
+          <section class="summary clearfix">
+            <h2>Hi, I'm Robi</h2>
+            <h3>I like <span id="home-likes">design</span></h3>
+            <h3>I graduated from <span>Stanford</span></h3>
+            <!-- <h3>I'm a <a href="creative-technologist.html"><span>creative technologist</span></a>, an <a href="entrepreneur.html"><span>entrepreneur</span></a>, and an <a href="artist.html"><span>artist</span></a></h3> -->
+            <h3>Let me tell you more about <a href="creative-technologist.html" title="A glance at my different projects"><span>who I am</span></a></h3>
+          </section>
+        </article>
+      </section>
+
+    </div> <!-- #main -->
+  </div> <!-- #main-container -->
+
+  <section class="contact">
+    <div>
+      <a href="ressources/sebastien_robaszkiewicz-resume.pdf" target="_blank" title="See my resume"><span class="typcn typcn-document"></span>
+      <a href="http://www.linkedin.com/in/sebastienrobaszkiewicz" target="_blank" title="LinkedIn profile"><span class="typcn typcn-social-linkedin"></span>
+      <a href="mailto:sebastien@robaszkiewicz.com" title="Contact me"><span class="typcn typcn-mail"></span>
+    </div>
+  </section>
+<!-- 
+  <div class="footer-container">
+    <footer class="wrapper">
+        <h3>footer</h3>
+    </footer>
+  </div>
+ -->
+  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
+
+  <script src="js/main.js"></script>
+
+  <script>
+    var homeLikes = ["empowering people", "design", "music", "art", "technology", "disruption", "dreaming", "learning"];
+    // "empowering people", "design", "music", "art", "technology", "running", "disruption", "dreaming", "learning", "teaching"
+
+    function randomizeArray(arr) {
+      for (var j, x, i = arr.length; i; j = parseInt(Math.random() * i),
+        x = arr[--i],
+        arr[i] = arr[j],
+        arr[j] = x)
+
+      return arr;
+    }
+
+    function rotateLike() {
+      var ct = $("#home-likes").data("homeLikes") || 0;
+      $("#home-likes").data("homeLikes", ct == homeLikes.length -1 ? 0 : ct + 1).text(homeLikes[ct]).fadeIn().delay(2000).fadeOut(200, rotateLike);
+    }
+    
+    $(document).ready(function() {
+      homeLikes.sort(function() { return 0.5 - Math.random() });
+      $(rotateLike)
+    })
+  </script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-45630434-1', 'robi.me');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>
