@@ -5,7 +5,9 @@
 
 @import 'reset';
 @import 'animation-mixins';
+@import 'transform-mixins';
 @import 'flexbox-mixins';
+@import 'icons';
 
 html, body {
   height: 100%;
@@ -42,7 +44,7 @@ h2 {
   @include align-items(center);
   @include justify-content(center);
   height: 100%;
-  padding: 2.5rem;
+  padding: 1rem 2rem;
 }
 
 .title {
@@ -79,9 +81,7 @@ h2 {
   padding: 0.5rem 0.7rem 0.5rem 0.9rem;
   text-transform: uppercase;
 
-  &:active {
-    background-color: rgba(255, 255, 255, 0.5)
-  }
+
 }
 
 .touchevents .button {
@@ -97,11 +97,40 @@ h2 {
 }
 
 .icons {
-  margin: 3rem 0 0;
+  margin: 4rem 0 0;
 
   li {
     display: inline-block;
-    margin: 0 1rem;
+    margin: 0 1.8rem;
+    position: relative;
+  }
+
+  .diamond::before {
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid white;
+    content: '';
+    height: 2rem;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    width: 2rem;
+    @include transform(translate3d(-50%,-50%,0) rotate3d(0,0,1,-45deg) scale3d(1,1,1));
+    @include transform-origin(50%);
+    @include transition('background-color 0.5s');
+  }
+
+}
+
+.touchevents {
+  li:active .diamond::before {
+    background-color: rgba(255, 255, 255, 0.5);
+    @include transition('background-color 0.1s');
+  }
+}
+
+.no-touchevents {
+  li:hover .diamond::before {
+    background-color: rgba(255, 255, 255, 0.5);
   }
 }
 
@@ -127,7 +156,7 @@ h2 {
     font-size: 14px;
   }
 
-  .button {
+  .icons .diamond::before {
     border: 2px solid white;
   }
 }
@@ -145,5 +174,9 @@ h2 {
 
   .title {
     letter-spacing: 0.7rem;
+  }
+
+  .icons li {
+    margin: 0 2rem;
   }
 }
