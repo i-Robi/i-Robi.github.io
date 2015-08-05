@@ -68,7 +68,11 @@ html, body {
   font-size: 10px; }
 
 body {
-  background: url(../img/bg.jpg) #d2bd90 no-repeat center/cover;
+  background-image: url(../img/bg.jpg);
+  background-color: #d2bd90;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   color: white;
   font-family: 'Lato', 'sans-serif';
   max-height: 100%;
@@ -125,32 +129,6 @@ h2 {
   font-style: italic;
   letter-spacing: 0.08rem;
   margin: 0.5rem 0; }
-
-.button {
-  background-color: rgba(255, 255, 255, 0.2);
-  border: 1px solid white;
-  cursor: pointer;
-  display: inline-block;
-  letter-spacing: 0.2rem;
-  margin: 2rem auto 0;
-  padding: 0.5rem 0.7rem 0.5rem 0.9rem;
-  text-transform: uppercase; }
-
-.touchevents .button {
-  -webkit-transition: background-color 0.1s;
-  -moz-transition: background-color 0.1s;
-  -ms-transition: background-color 0.1s;
-  -o-transition: background-color 0.1s;
-  transition: background-color 0.1s; }
-
-.no-touchevents .button {
-  -webkit-transition: background-color 0.5s;
-  -moz-transition: background-color 0.5s;
-  -ms-transition: background-color 0.5s;
-  -o-transition: background-color 0.5s;
-  transition: background-color 0.5s; }
-  .no-touchevents .button:hover {
-    background-color: rgba(255, 255, 255, 0.5); }
 
 .icons {
   margin: 4rem 0 0; }
