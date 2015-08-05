@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head lang="en-US">
+  <!-- General -->
   <meta charset="utf-8">
   <meta name="author" content="Sébastien Robaszkiewicz">
   <meta name="description" content="Sébastien Robaszkiewicz (a.k.a. Robi)'s homepage."> <!-- TODO -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
   <title>Sébastien Robaszkiewicz</title>
 
-  <link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Merriweather:300italic' rel='stylesheet' type='text/css'>
+  <!-- Stylesheets -->
+  <link href='http://fonts.googleapis.com/css?family=Lato:400' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Merriweather:400italic' rel='stylesheet' type='text/css'>
   <link href='css/main.css' rel='stylesheet' type='text/css'>
+  <link href='css/icons.css' rel='stylesheet' type='text/css'>
 
+  <!-- Favicon -->
   <link rel="apple-touch-icon" sizes="57x57" href="img/favicon/apple-touch-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="img/favicon/apple-touch-icon-60x60.png">
   <link rel="apple-touch-icon" sizes="72x72" href="img/favicon/apple-touch-icon-72x72.png">
@@ -29,23 +32,29 @@
   <meta name="msapplication-TileColor" content="#da532c">
   <meta name="msapplication-TileImage" content="/mstile-144x144.png">
   <meta name="theme-color" content="#ffffff">
-
-
 </head>
+
 <body>
   <canvas id="scene"></canvas>
   <div class="container">
-    <div>
+    <main>
       <h1 class="title large-screen">Sébastien Robaszkiewicz</h1>
       <h1 class="title small-screen">S. Robaszkiewicz</h1>
-      <h3 class="tagline">(call me Robi)</h3>
+      <p class="tagline">(call me Robi)</p>
       <h2 class="subtitle">Digital experiences</h2>
-      <div class="button">
+      <!-- <div class="button">
         <a href='mailto:hello@robi.me?subject=Hello!'>contact</a>
-      </div>
-    </div>
+      </div> -->
+      <ul class="icons">
+        <li><a class="icon-mail" href="mailto:hello@robi.me?subject=Hello!"></a></li>
+        <li><a class="icon-twitter" href="https://twitter.com/i_Robi" target="_blank"></a></li>
+        <li><a class="icon-linkedin" href="https://linkedin.com/in/sebastienrobaszkiewicz" target="_blank"></a></li>
+      </ul>
+    </main>
   </div>
 </body>
+
 <script src="js/modernizr.js"></script>
 <script src="js/index.umd.js"></script>
+<script src="js/analytics.js"></script>
 </html>
