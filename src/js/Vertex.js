@@ -1,26 +1,31 @@
+/**
+ * @file Vertex class.
+ * @author Sébastien Robaszkiewicz [hello@robi.me]
+ */
+
 'use strict';
 
 class Vertex {
-  constructor(options = {}) {
-    this.canvasMargin = options.canvasMargin || 0;
+  constructor(config = {}) {
+    this.canvasMargin = config.canvasMargin || 0;
 
     this.x = Math.random() * (1 + 2 * this.canvasMargin) - this.canvasMargin; // normalized
     this.y = Math.random() * (1 + 2 * this.canvasMargin) - this.canvasMargin; // normalized
     this.z = Math.random();
-    
-    this.minRadius = options.minRadius || 4; // in pixels
-    this.radiusVariance = options.radiusVariance || 6; // in pixels
+
+    this.minRadius = config.minRadius || 4; // pixels
+    this.radiusVariance = config.radiusVariance || 6; // pixels
     this.radius = this.radiusVariance * this.z + this.minRadius;
-    
-    this.velocityFactor = options.velocityFactor || 20; // pixels per second
+
+    this.velocityFactor = config.velocityFactor || 7; // pixels per second
     this.vInitX = Math.random() * 2 - 1;
     this.vInitY = Math.random() * 2 - 1;
     this.dBeta = 0;
     this.dGamma = 0;
-    
-    this.minFadeinDuration = options.minFadeinDuration || 3;
-    this.fadeInDurationVariance = options.fadeInDurationVariance || 2;
-    this.fadeInDuration = this.minFadeinDuration + (1 - this.z) * this.fadeInDurationVariance; // in seconds
+
+    this.minFadeinDuration = config.minFadeinDuration || 3;
+    this.fadeInDurationVariance = config.fadeInDurationVariance || 2;
+    this.fadeInDuration = this.minFadeinDuration + (1 - this.z) * this.fadeInDurationVariance; // seconds
 
     this.opacity = 0;
 
@@ -28,11 +33,11 @@ class Vertex {
   }
 
   get vx() {
-    return this.velocityFactor * (this.vInitX + this.dGamma * this.z * 200);
+    return this.velocityFactor * (this.vInitX + this.dGamma * this.z * 0.2);
   }
 
   get vy() {
-    return this.velocityFactor * (this.vInitY + this.dBeta * this.z * 200);
+    return this.velocityFactor * (this.vInitY + this.dBeta * this.z * 0.2);
   }
 
   update(elapsedTime, dt, w, h) {

@@ -1,116 +1,25 @@
+/**
+ * @file Animation module.
+ * @author Sébastien Robaszkiewicz [hello@robi.me]
+ */
+
 'use strict';
 
-const loop = require('./loop');
-const Vertex = require('./Vertex');
 const Edge = require('./Edge');
+const Vertex = require('./Vertex');
+const World = require('./World');
 
-// Canvas parameters
-var canvasWidth;
-var canvasHeight;
-var windowWidth;
-var windowHeight;
-var canvas;
-var ctx;
-
-// Game loop options
-var options = {
-  ctx: ctx,
-  buffers: [],
-  update: update,
-  render: render,
-  fps: 60
-    // gui: gui.model
-};
-
-var edges = [];
-var elapsedTime = 0;
-
-// Game loop main functions
-function update(dt) {
-  edges = [];
-
-  for (let i = 0; i < vertices.length; i++) {
-    let vertex1 = vertices[i];
-    vertices[i].update(elapsedTime, dt, canvasWidth, canvasHeight);
-
-    for (let j = i; j > 0; j--) {
-      let vertex2 = vertices[j];
-      let dist = distance(vertex1, vertex2);
-
-      if (dist < minDist)
-        edges.push(new Edge(vertex1, vertex2, dist, minDist));
-    }
-  }
-
-  elapsedTime += dt;
-}
-
-function render(dt) {
-  ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-
-  for (let i = 0; i < vertices.length; i++)
-    vertices[i].draw(ctx, dt);
-
-  for (let i = 0; i < edges.length; i++)
-    edges[i].draw(ctx, dt);
-}
-
-function start() {
-  windowWidth = parseInt(window.innerWidth, 10);
-  windowHeight = parseInt(window.innerHeight, 10);
-
-  canvas = document.querySelector('#scene');
-  ctx = canvas.getContext('2d');
-
-  updateCanvasSize()
-  window.addEventListener('resize', updateCanvasSize);
-
-  loop.run(options);
-}
-
-// Animation
-var minDist = 20000; // square distance
-var verticesNum;
-var vertices = [];
-
-var PIXEL_RATIO = (function() {
-  var context = document.createElement("canvas").getContext("2d"),
-    dpr = window.devicePixelRatio || 1,
-    bsr = context.webkitBackingStorePixelRatio ||
+const PIXEL_RATIO = (function() {
+  const context = document.createElement('canvas').getContext('2d');
+  const dPR = window.devicePixelRatio || 1;
+  const bPR = context.webkitBackingStorePixelRatio ||
     context.mozBackingStorePixelRatio ||
     context.msBackingStorePixelRatio ||
     context.oBackingStorePixelRatio ||
     context.backingStorePixelRatio || 1;
 
-  return dpr / bsr;
+  return dPR / bPR;
 })();
-
-function updateCanvasSize() {
-  windowWidth = parseInt(window.innerWidth, 10);
-  windowHeight = parseInt(window.innerHeight, 10);
-  canvasWidth = windowWidth * PIXEL_RATIO;
-  canvasHeight = windowHeight * PIXEL_RATIO;
-
-  canvas.width = canvasWidth;
-  canvas.height = canvasHeight;
-  canvas.style.width = windowWidth + "px";
-  canvas.style.height = windowHeight + "px";
-  canvas.getContext("2d").setTransform(PIXEL_RATIO, 0, 0, PIXEL_RATIO, 0, 0);
-
-  vertices = [];
-  verticesNum = Math.round(canvasWidth * canvasHeight / 12000);
-
-  for (let i = 0; i < verticesNum; i++) {
-    vertices.push(new Vertex({
-      canvasMargin: 0.1,
-      velocityFactor: 7,
-      minRadius: 4,
-      radiusVariance: 6,
-      minFadeinDuration: 3,
-      fadeinDurationVariance: 2
-    }));
-  }
-}
 
 function distance(vertex1, vertex2) {
   let dx = vertex1.coordinates.x - vertex2.coordinates.x;
@@ -119,61 +28,161 @@ function distance(vertex1, vertex2) {
   return dx * dx + dy * dy;
 }
 
-function drawEdge(vertex1, vertex2, dist) {
-  ctx.beginPath();
-  ctx.strokeStyle = "rgba(0, 0, 0, " + (1.2 - dist / minDist) * Math.max(vertex1.opacity, vertex2.opacity) + ")";
-  ctx.moveTo(vertex1.coordinates.x, vertex1.coordinates.y);
-  ctx.lineTo(vertex2.coordinates.x, vertex2.coordinates.y);
-  ctx.stroke();
-  ctx.closePath();
+function getTime() {
+  return (window.performance && window.performance.now) ?
+    window.performance.now() / 1000 : new Date().getTime() / 1000;
 }
 
-function onOrientation(beta, gamma) {
-  let now = timestamp();
-  let k = 0.8;
-
-  if (previousTimestamp && previousBeta && previousGamma)  {
-    let dt = now - previousTimestamp;
-    dBeta = (beta - previousBeta) / dt;
-    dGamma = (gamma - previousGamma) / dt;
+/**
+ * @class Filter
+ * @description Calculates the derivative and applies a low-pass filter.
+ */
+class Filter {
+  constructor(timeConstant) {
+    this._dX;
+    this._dXFiltered;
+    this._previousX;
+    this._previousDXFiltered;
+    this._previousTimestamp;
+    this._timeConstant = timeConstant;
   }
 
-  previousTimestamp = now;
-  previousBeta = beta;
-  previousGamma = gamma;
+  _decay(dt) {
+    return Math.exp(-2 * Math.PI * dt / this._timeConstant);
+  }
 
-  if (dBeta && dGamma) {
-    if (previousDBetaFiltered && previousDGammaFiltered) {
-      dBetaFiltered = k * previousDBetaFiltered + (1 - k) * dBeta;
-      dGammaFiltered = k * previousDGammaFiltered + (1 - k) * dGamma;
-    } else {
-      dBetaFiltered = dBeta;
-      dGammaFiltered = dGamma;
+  input(x) {
+    const now = getTime();
+    let k;
+
+    if (this._previousTimestamp && this._previousX) {
+      const dt = now - this._previousTimestamp;
+      k = this._decay(dt);
+      this._dX = (x - this._previousX) / dt;
     }
 
-    previousDBetaFiltered = dBetaFiltered;
-    previousDGammaFiltered = dGammaFiltered;
+    this._previousTimestamp = now;
+    this._previousX = x;
 
-    for (let i = 0; i < vertices.length; i++)
-      vertices[i].onOrientation(dBetaFiltered, dGammaFiltered);
+    if (this._dX) {
+      if (this._previousDXFiltered)
+        this._dXFiltered = k * this._previousDXFiltered + (1 - k) * this._dX;
+      else
+        this._dXFiltered = this._dX;
+
+      this._previousDXFiltered = this._dXFiltered;
+
+      return this._dXFiltered;
+    }
+
+    return;
   }
 }
 
-function timestamp() {
-  return window.performance && window.performance.now ? window.performance.now() : new Date().getTime();
+/**
+ * @class Animation
+ * @extends World
+ * @description Calculates and renders the canvas animation.
+ */
+class Animation extends World {
+  constructor() {
+    super();
+
+    this._canvas = document.querySelector('#scene');
+    this._canvasHeight;
+    this._canvasWidth;
+    this._edges = [];
+    this._elapsedTime = 0;
+    this._filter;
+    this._vertices = [];
+    this._verticesNum;
+    this._windowWidth;
+    this._windowHeight;
+
+    this.config;
+    this.ctx = this._canvas.getContext('2d');
+
+    this._updateCanvasSize = this._updateCanvasSize.bind(this);
+  }
+
+  render(dt) {
+    this.ctx.clearRect(0, 0, this._canvasWidth, this._canvasHeight);
+
+    for (let i = 0; i < this._vertices.length; i++)
+      this._vertices[i].draw(this.ctx, dt);
+
+    for (let i = 0; i < this._edges.length; i++)
+      this._edges[i].draw(this.ctx, dt);
+  }
+
+  update(dt) {
+    this._edges = [];
+
+    for (let i = 0; i < this._vertices.length; i++) {
+      // Update the vertex
+      let vertex1 = this._vertices[i];
+      this._vertices[i].update(
+        this._elapsedTime,
+        dt,
+        this._canvasWidth,
+        this._canvasHeight
+      );
+
+      // Update the edges array
+      for (let j = i; j > 0; j--) {
+        let vertex2 = this._vertices[j];
+        let dist = distance(vertex1, vertex2);
+        const minDistance = this.config.minDistance * this.config.minDistance;
+
+        if (dist < minDistance) {
+          let edge = new Edge(vertex1, vertex2, dist, minDistance);
+          this._edges.push(edge);
+        }
+      }
+    }
+
+    this._elapsedTime += dt;
+  }
+
+  _updateCanvasSize() {
+    this._windowWidth = parseInt(window.innerWidth, 10);
+    this._windowHeight = parseInt(window.innerHeight, 10);
+    this._canvasWidth = this._windowWidth * PIXEL_RATIO;
+    this._canvasHeight = this._windowHeight * PIXEL_RATIO;
+
+    this._canvas.width = this._canvasWidth;
+    this._canvas.height = this._canvasHeight;
+    this._canvas.style.width = this._windowWidth + "px";
+    this._canvas.style.height = this._windowHeight + "px";
+    this._canvas.getContext("2d")
+      .setTransform(PIXEL_RATIO, 0, 0, PIXEL_RATIO, 0, 0);
+
+    this._vertices = [];
+    this._verticesNum = Math.round(this._canvasWidth * this._canvasHeight
+      * this.config.vertexDensity * 0.00003);
+
+    for (let i = 0; i < this._verticesNum; ++i)
+      this._vertices.push(new Vertex(this.config));
+  }
+
+  start(worldConfig, gameloopConfig) {
+    super.start(worldConfig, gameloopConfig);
+
+    this._updateCanvasSize();
+    this._betaFilter = new Filter(this.config.filterTimeConstant);
+    this._gammaFilter = new Filter(this.config.filterTimeConstant);
+    window.addEventListener('resize', this._updateCanvasSize);
+  }
+
+  onOrientation(beta, gamma) {
+    const dBetaFiltered = this._betaFilter.input(beta);
+    const dGammaFiltered = this._gammaFilter.input(gamma);
+
+    if (dBetaFiltered && dGammaFiltered) {
+      for (let i = 0; i < this._vertices.length; i++)
+        this._vertices[i].onOrientation(dBetaFiltered, dGammaFiltered);
+    }
+  }
 }
 
-var previousTimestamp;
-var previousBeta;
-var previousGamma;
-var dBeta;
-var dGamma;
-var dBetaFiltered;
-var dGammaFiltered;
-var previousDBetaFiltered;
-var previousDGammaFiltered;
-
-module.exports = {
-  start: start,
-  onOrientation: onOrientation
-};
+module.exports = new Animation();
