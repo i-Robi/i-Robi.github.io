@@ -30,14 +30,31 @@ const gameloopConfig = {
   // gui: gui.model
 };
 
+// Media query function
+function onResize(mql, name) {
+  console.log('yeye', name);
+  if (mql.matches)
+    name.innerHTML = 'Sébastien Robaszkiewicz';
+  else
+    name.innerHTML = 'S. Robaszkiewicz';
+}
+
 // Script
 (function() {
   document.body.addEventListener('touchmove', (e) => {
     e.preventDefault();
   });
 
+  // Update name on media query
+  let name = document.querySelector('.title');
+  let mql = window.matchMedia('(min-width: 480px)');
+  mql.addListener(() => onResize(mql, name));
+  onResize(mql, name);
+
+  // Start canvas animation
   animation.start(worldConfig, gameloopConfig);
 
+  // Start motion input module
   input.init('orientationAlt')
     .then((modules) => {
       const orientation = modules[0];

@@ -33,7 +33,7 @@ h1 {
 }
 
 h2 {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 #scene {
@@ -54,17 +54,13 @@ h2 {
 .title {
   letter-spacing: 0.7rem;
   line-height: 1.2;
-  margin: 1rem 0 0.5rem;
+  margin: 1rem 0 0.75rem;
   text-transform: uppercase;
-
-  &.large-screen {
-    display: none;
-  }
 }
 
 .subtitle {
-  letter-spacing: 0.45rem;
-  margin: 1rem 0;
+  letter-spacing: 0.3rem;
+  margin: 1.5rem 0;
   text-transform: uppercase;
 }
 
@@ -72,15 +68,14 @@ h2 {
   font-family: 'Merriweather', 'serif';
   font-style: italic;
   letter-spacing: 0.08rem;
-  margin: 0.5rem 0;
 }
 
 .icons {
-  margin: 4rem 0 0;
+  margin: 3rem 0 0;
 
   li {
     display: inline-block;
-    margin: 0 1.8rem;
+    margin: 0 2rem;
     position: relative;
   }
 
@@ -114,39 +109,41 @@ h2 {
 }
 
 /* Custom, iPhone Retina */
-@media only screen and (min-width : 320px) {
+@media only screen and (min-width: 320px) {
 
 }
 
 /* Extra Small Devices, Phones */
-@media only screen and (min-width : 480px) {
-    .title.large-screen {
-      display: block;
-    }
-
-    .title.small-screen {
-      display: none;
-    }
+@media only screen and (min-width: 480px) {
+  .subtitle {
+    font-size: 1.2rem;
+    letter-spacing: 0.45rem;
+  }
 }
 
 /* Small Devices, Tablets */
-@media only screen and (min-width : 768px) {
+@media only screen and (min-width: 768px) {
   html, body {
     font-size: 14px;
   }
 
-  .icons .diamond::before {
-    border: 2px solid white;
+  .icons {
+    margin-top: 3.5rem;
+    
+    .diamond::before {
+      border: 2px solid white;
+    }
   }
+
 }
 
 /* Medium Devices, Desktops */
-@media only screen and (min-width : 992px) {
+@media only screen and (min-width: 992px) {
 
 }
 
 /* Large Devices, Wide Screens */
-@media only screen and (min-width : 1200px) {
+@media only screen and (min-width: 1200px) {
   html, body {
     font-size: 16px;
   }
@@ -155,7 +152,11 @@ h2 {
     letter-spacing: 0.9rem;
   }
 
-  .icons li {
-    margin: 0 2rem;
+  .icons {
+    margin-top: 4rem;
+
+    li {
+      margin: 0 2.25rem;
+    }
   }
 }

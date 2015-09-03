@@ -84,7 +84,7 @@ h1 {
   font-size: 1.7rem; }
 
 h2 {
-  font-size: 1.2rem; }
+  font-size: 1.1rem; }
 
 #scene {
   left: 0;
@@ -114,27 +114,24 @@ h2 {
 .title {
   letter-spacing: 0.7rem;
   line-height: 1.2;
-  margin: 1rem 0 0.5rem;
+  margin: 1rem 0 0.75rem;
   text-transform: uppercase; }
-  .title.large-screen {
-    display: none; }
 
 .subtitle {
-  letter-spacing: 0.45rem;
-  margin: 1rem 0;
+  letter-spacing: 0.3rem;
+  margin: 1.5rem 0;
   text-transform: uppercase; }
 
 .tagline {
   font-family: 'Merriweather', 'serif';
   font-style: italic;
-  letter-spacing: 0.08rem;
-  margin: 0.5rem 0; }
+  letter-spacing: 0.08rem; }
 
 .icons {
-  margin: 4rem 0 0; }
+  margin: 3rem 0 0; }
   .icons li {
     display: inline-block;
-    margin: 0 1.8rem;
+    margin: 0 2rem;
     position: relative; }
   .icons .diamond::before {
     background-color: rgba(255, 255, 255, 0.2);
@@ -175,17 +172,18 @@ h2 {
 /* Custom, iPhone Retina */
 /* Extra Small Devices, Phones */
 @media only screen and (min-width: 480px) {
-  .title.large-screen {
-    display: block; }
-  .title.small-screen {
-    display: none; } }
+  .subtitle {
+    font-size: 1.2rem;
+    letter-spacing: 0.45rem; } }
 
 /* Small Devices, Tablets */
 @media only screen and (min-width: 768px) {
   html, body {
     font-size: 14px; }
-  .icons .diamond::before {
-    border: 2px solid white; } }
+  .icons {
+    margin-top: 3.5rem; }
+    .icons .diamond::before {
+      border: 2px solid white; } }
 
 /* Medium Devices, Desktops */
 /* Large Devices, Wide Screens */
@@ -194,5 +192,7 @@ h2 {
     font-size: 16px; }
   .title {
     letter-spacing: 0.9rem; }
-  .icons li {
-    margin: 0 2rem; } }
+  .icons {
+    margin-top: 4rem; }
+    .icons li {
+      margin: 0 2.25rem; } }
