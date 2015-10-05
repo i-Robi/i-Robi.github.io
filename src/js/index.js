@@ -41,7 +41,7 @@ function onResize(mql, name) {
 // Script
 (function() {
   document.body.addEventListener('touchmove', (e) => {
-    e.preventDefault();
+    e.preventDefault(); // prevents scrolling
   });
 
   // Update name on media query
