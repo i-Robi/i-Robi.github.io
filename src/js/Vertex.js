@@ -57,7 +57,7 @@ class Vertex {
     this.coordinates.x = this.x * w;
     this.coordinates.y = this.y * h;
 
-    this.opacity = 0.04 * Math.min(elapsedTime / this.fadeInDuration, 1);
+    this.opacity = 0.05 * Math.min(elapsedTime / this.fadeInDuration, 1);
   }
 
   draw(ctx, dt) {
