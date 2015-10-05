@@ -9,6 +9,11 @@
 @import 'flexbox-mixins';
 @import 'icons';
 
+@include keyframes('fadein') {
+  0%   { opacity: 0 };
+  100% { opacity: 1 };
+};
+
 html, body {
   height: 100%;
   font-size: 10px;
@@ -47,7 +52,9 @@ h2 {
   @include flexbox;
   @include align-items(center);
   @include justify-content(center);
+  @include animation('fadein 3s 0.5s forwards');
   height: 100%;
+  opacity: 0;
   padding: 1rem 2rem;
 }
 
@@ -79,31 +86,42 @@ h2 {
     position: relative;
   }
 
-  .diamond::before {
+  .frame::before {
     background-color: rgba(255, 255, 255, 0.2);
     border: 1px solid white;
     content: '';
-    height: 2rem;
     left: 50%;
     position: absolute;
     top: 50%;
-    width: 2rem;
-    @include transform(translate3d(-50%,-50%,0) rotate3d(0,0,1,-45deg) scale3d(1,1,1));
     @include transform-origin(50%);
     @include transition('background-color 0.5s');
   }
 
+  // Circle shape
+  .frame.circle::before {
+    border-radius: 50%;
+    height: 2.5rem;
+    width: 2.5rem;
+    @include transform(translate3d(-50%,-50%,0));
+  }
+
+  // Diamond shape
+  .frame.diamond::before {
+    height: 2rem;
+    width: 2rem;
+    @include transform(translate3d(-50%,-50%,0) rotate3d(0,0,1,-45deg) scale3d(1,1,1));
+  }
 }
 
 .touchevents {
-  li:active .diamond::before {
+  li:active .frame::before {
     background-color: rgba(255, 255, 255, 0.5);
     @include transition('background-color 0.1s');
   }
 }
 
 .no-touchevents {
-  li:hover .diamond::before {
+  li:hover .frame::before {
     background-color: rgba(255, 255, 255, 0.5);
   }
 }
@@ -129,9 +147,9 @@ h2 {
 
   .icons {
     margin-top: 3.5rem;
-    
-    .diamond::before {
-      border: 2px solid white;
+
+    .frame.diamond::before {
+      border-width: 2px;
     }
   }
 
