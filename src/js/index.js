@@ -32,7 +32,6 @@ const gameloopConfig = {
 
 // Media query function
 function onResize(mql, name) {
-  console.log('yeye', name);
   if (mql.matches)
     name.innerHTML = 'Sébastien Robaszkiewicz';
   else
