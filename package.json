@@ -1,7 +1,7 @@
 {
   "name": "robi.me",
-  "version": "2.0.0",
-  "description": "Sébastien Robaszkiewicz's personal website.",
+  "version": "2.0.1",
+  "description": "Sébastien Robaszkiewicz's personal website: interactive experiences.",
   "main": "build/index.js",
   "homepage": "http://robi.me",
   "author": {
@@ -12,14 +12,15 @@
   "repository": "i-Robi/i-Robi.github.io",
   "standalone": "script",
   "scripts": {
-    "transpile": "node ./bin/scripts.js --transpile",
-    "prebundle": "npm run hint && npm run transpile",
     "bundle": "node ./bin/scripts.js --bundle",
+    "hint": "jshint ./src; true",
     "postbundle": "npm run uglify",
+    "prebundle": "npm run hint && npm run transpile",
     "sass": "node ./bin/scripts.js --sass",
+    "start": "http-server",
+    "transpile": "node ./bin/scripts.js --transpile",
     "uglify": "node ./bin/scripts.js --uglify",
-    "watch": "node ./bin/scripts.js --watch",
-    "hint": "jshint ./src; true"
+    "watch": "node ./bin/scripts.js --watch"
   },
   "jshintConfig": {
     "esnext": true,
